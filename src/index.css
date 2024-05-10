@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-slate-100;
+  -webkit-tap-highlight-color: transparent !important;
+  scroll-behavior: smooth !important;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ef1c26 orange;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: orange;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ef1c26;
+  border-radius: 20px;
+  /* border: 3px solid red; */
+}
