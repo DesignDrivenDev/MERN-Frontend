@@ -12,10 +12,8 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
-  const { fetchUserDetails } = useContext(Context);
+  const { fetchUserDetails, fetchUserAddToCart } = useContext(Context);
   // const generalContext = useContext(Context);
-
-  // console.log(fetchUserDetails(), "generalContext");
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -46,6 +44,7 @@ const Login = () => {
     if (responseData.success) {
       toast.success(responseData.message);
       await fetchUserDetails();
+      await fetchUserAddToCart();
       navigate("/");
     }
     if (responseData.error) {

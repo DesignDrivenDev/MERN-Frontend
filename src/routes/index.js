@@ -10,6 +10,9 @@ import ForgotPassword from "../pages/ForgotPassword";
 import AdminPanel from "../pages/AdminPanel";
 import AllUsers from "../pages/AllUsers";
 import AllProducts from "../pages/AllProducts";
+import CategoryProduct from "../pages/CategoryProduct";
+import ProductDetails from "../pages/ProductDetails";
+import SearchProduct from "../pages/SearchProduct";
 
 const router = createBrowserRouter([
   {
@@ -45,12 +48,23 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
+        path: "product-category",
+        // path: "product-category/:categoryName",
+        element: <CategoryProduct />,
+      },
+      {
+        path: "product/:id",
+        element: <ProductDetails />,
+      },
+      {
+        path: "search",
+        element: <SearchProduct />,
+      },
+      {
         path: "admin-panel",
-
         element: <AdminPanel />,
         children: [
           {
-            // path: "/admin-panel",
             path: "all-users",
             element: <AllUsers />,
           },

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import AdminEditProduct from "./AdminEditProduct";
-import displayINRCurrency from "./displayCurrency";
+import displayINRCurrency from "../helpers/displayCurrency";
 
 const AdminProductCard = ({ data, fetchUpdatedData }) => {
   const [editProduct, setEditProduct] = useState(false);
   return (
-    <div className="bg-white shadow-lg p-3 rounded-md w-[237px]">
+    <div className="bg-white shadow-lg p-3 rounded-md ">
       <div className="group block relative">
         <img
           src={data.image[0]}
@@ -13,21 +13,23 @@ const AdminProductCard = ({ data, fetchUpdatedData }) => {
           className="w-full object-contain h-40"
         />
 
-        <div className="mt-3 flex justify-between gap-x-3 text-sm">
+        <div className="mt-3 text-sm">
           <div>
-            <h3 className="text-gray-900 group-hover:underline group-hover:underline-offset-4">
+            <h3 className="line-clamp-2 text-gray-900 group-hover:underline group-hover:underline-offset-4">
               {data.productName}
             </h3>
 
-            <p className="mt-1.5 text-pretty text-xs text-gray-500">
+            {/* <p className="mt-1.5 text-pretty text-xs text-gray-500">
               {data.description}
-            </p>
+            </p> */}
           </div>
-          <div>
-            <strike className="text-gray-900">
+          <div className="font-semibold pt-2">
+            <strike className="text-gray-400">
               {displayINRCurrency(data?.price)}
             </strike>
-            <p className="block">{displayINRCurrency(data?.sellingPrice)}</p>
+            <span className="pl-2">
+              {displayINRCurrency(data?.sellingPrice)}
+            </span>
           </div>
         </div>
         <div

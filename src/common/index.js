@@ -37,6 +37,46 @@ const SummaryAPI = {
     url: `${backendDomain}/api/edit-product`,
     method: "PUT",
   },
+  productCategory: {
+    url: `${backendDomain}/api/product-category`,
+    method: "GET",
+  },
+  categoryWiseProduct: {
+    url: `${backendDomain}/api/categories-product`,
+    method: "post",
+  },
+  productDetails: {
+    url: `${backendDomain}/api/product-details`,
+    method: "post",
+  },
+  addTocart: {
+    url: `${backendDomain}/api/add-to-cart`,
+    method: "POST",
+  },
+  addToCartProductCount: {
+    url: `${backendDomain}/api/countAddToCartProduct`,
+    method: "get",
+  },
+  viewCartProduct: {
+    url: `${backendDomain}/api/view-cart-product`,
+    method: "get",
+  },
+  updateCartProduct: {
+    url: `${backendDomain}/api/update-cart-product`,
+    method: "put",
+  },
+  deleteCartProduct: {
+    url: `${backendDomain}/api/delete-cart-product`,
+    method: "DELETE",
+  },
+  searchProduct: {
+    url: `${backendDomain}/api/search-product`,
+    method: "get",
+  },
+  filterProduct: {
+    url: `${backendDomain}/api/filter-product`,
+    method: "post",
+  },
 };
 
 export default SummaryAPI;

@@ -224,7 +224,7 @@ const UploadProduct = ({ onClose, fetchUpdatedData }) => {
                       <img
                         src={img}
                         alt={img + index}
-                        className="w-28 h-28 rounded-xl cursor-pointer"
+                        className="w-28 h-28 rounded-xl object-contain cursor-pointer"
                         onClick={() => {
                           setOpenFullScreenImage(true);
                           setFullScreenImage(img);

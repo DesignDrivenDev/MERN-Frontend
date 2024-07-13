@@ -1,16 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "./Logo";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SummaryAPI from "../common";
 import { toast } from "react-toastify";
 import { setUserDetails } from "../store/userSlice";
 import ROLE from "../common/role";
+import { useContext, useState } from "react";
+import Context from "../context";
 
 export const Header = () => {
   const user = useSelector((state) => state?.user?.user);
+  const countContext = useContext(Context);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const searchInput = useLocation();
+
+  const URLSearch = new URLSearchParams(searchInput?.search);
+  const searchQuery = URLSearch.getAll("q");
+  const [search, setSearch] = useState(searchQuery);
+  // const [search, setSearch] = useState(searchInput?.search?.split("=")[1]);
+
   const handleLogout = async () => {
     const fetchData = await fetch(SummaryAPI.logout_user.url, {
       method: SummaryAPI.logout_user.method,
@@ -26,8 +36,18 @@ export const Header = () => {
     }
   };
 
+  const handleSearch = async (e) => {
+    const { value } = e?.target;
+    setSearch(value);
+    if (value) {
+      navigate(`/search?q=${value}`);
+    } else {
+      navigate("/search");
+    }
+  };
+
   return (
-    <header className="shadow-md bg-white">
+    <header className="shadow-md bg-white fixed w-full z-50">
       <div className=" w-11/12 container mx-auto py-2 flex justify-between items-center">
         <div className="">
           <Link to="/">
@@ -43,6 +63,8 @@ export const Header = () => {
             <input
               type="text"
               id="Search"
+              value={search}
+              onChange={handleSearch}
               placeholder="Search for..."
               className="w-full min-w-96 px-2 py-1.5 placeholder:text-sm border border-red-900 rounded-lg focus:outline-none"
             />
@@ -75,10 +97,11 @@ export const Header = () => {
         {/* user profile */}
         <div className="flex justify-center items-center gap-x-4 ">
           <div className="relative cursor-pointer">
-            <p className="bg-red-500 p-1 h-6 w-6 text-white rounded-full text-center text-xs absolute -top-3 -right-1">
-              {" "}
-              10
-            </p>
+            {user?._id && (
+              <p className="bg-red-500 p-1 h-6 w-6 text-white rounded-full text-center text-xs absolute -top-3 -right-1">
+                {countContext?.cartCount}
+              </p>
+            )}
             <Link to={"/cart"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

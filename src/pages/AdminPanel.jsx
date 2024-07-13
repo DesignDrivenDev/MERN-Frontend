@@ -15,7 +15,7 @@ const AdminPanel = () => {
   }, [user, navigate]);
 
   return (
-    <div className="min-h-[calc(100vh-165px)] hidden md:flex m-2 gap-4">
+    <div className="h-[calc(100vh-165px)] hidden md:flex m-2 gap-4">
       <aside className="bg-white min-h-full w-full max-w-60 ">
         <div className="flex flex-col justify-center items-center bg-blue-950 p-4">
           <div>
@@ -65,11 +65,6 @@ const AdminPanel = () => {
         </div>
       </aside>
       <main className="w-full h-full p-2">
-        <div>
-          <h1 className="text-3xl font-bold pb-3">
-            Welcome <span className="text-blue-700">{user?.name}</span>
-          </h1>
-        </div>
         <Outlet />
       </main>
     </div>

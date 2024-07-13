@@ -18,8 +18,8 @@ const AllProducts = () => {
   }, []);
 
   return (
-    <div>
-      <div className="bg-white p-3 rounded-md flex justify-between items-center">
+    <div className="">
+      <div className="bg-white p-3 flex justify-between items-center shadow-xl">
         <h1 className="font-bold text-lg">All Product</h1>
         <button
           onClick={() => setOpenUpdateForm(true)}
@@ -36,7 +36,7 @@ const AllProducts = () => {
         />
       )}
       {/* product display */}
-      <div className="flex flex-row gap-3 py-4 max-w-7xl flex-wrap">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-4 max-w-7xl flex-wrap h-[calc(100vh-236px)] bg-red-800 overflow-y-scroll shadow-xl ">
         {allProducts.map((product, index) => (
           <AdminProductCard
             key={index + "allProduct"}

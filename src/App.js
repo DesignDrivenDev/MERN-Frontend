@@ -3,12 +3,13 @@ import { Header } from "./components/Header";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SummaryAPI from "./common";
 import Context from "./context";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "./store/userSlice";
 function App() {
+  const [cartCount, setCartCount] = useState(0);
   const dispatch = useDispatch();
   const fetchUserDetails = async () => {
     const response = await fetch(SummaryAPI.current_user.url, {
@@ -19,12 +20,19 @@ function App() {
     if (userData.success) {
       dispatch(setUserDetails(userData.data));
     }
-
-    // console.log(userData.data, "user data");
+  };
+  const fetchUserAddToCart = async () => {
+    const response = await fetch(SummaryAPI.addToCartProductCount.url, {
+      method: SummaryAPI.addToCartProductCount.method,
+      credentials: "include",
+    });
+    const userCartData = await response.json();
+    setCartCount(userCartData?.data?.count);
   };
 
   useEffect(() => {
     fetchUserDetails();
+    fetchUserAddToCart();
   }, []);
 
   return (
@@ -32,11 +40,13 @@ function App() {
       <Context.Provider
         value={{
           fetchUserDetails, // fetch user details
+          cartCount, // product count in the cart
+          fetchUserAddToCart,
         }}
       >
-        <ToastContainer />
+        <ToastContainer position="top-center" />
         <Header />
-        <main>
+        <main className="pt-20">
           <Outlet />
         </main>
         <Footer />
@@ -46,9 +56,3 @@ function App() {
 }
 
 export default App;
-
-// const getData = async () => {
-//   const res = await fetch("http://localhost:8080/api/user-details");
-//   const data = await res.json();
-//   console.log(data, "reskadswj");
-// };
